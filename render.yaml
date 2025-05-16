@@ -5,4 +5,4 @@ services:
     plan: free
     repo: https://github.com/Chlo3F/Masanous
     branch: main
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: Dockerfile
