@@ -1,7 +1,6 @@
-# Base PHP avec FPM (Alpine pour taille réduite)
 FROM php:8.2-fpm-alpine
 
-# Installer dépendances système nécessaires (nginx, curl, bash, extensions PHP, etc.)
+# Installer les dépendances système nécessaires
 RUN apk add --no-cache \
     nginx \
     bash \
@@ -11,41 +10,32 @@ RUN apk add --no-cache \
     libpng-dev \
     icu-dev \
     oniguruma-dev \
-    mysql-client \
-    gcc \
+    git \
+    unzip \
+    autoconf \
     g++ \
     make \
-    autoconf \
     && docker-php-ext-install pdo pdo_mysql intl opcache mbstring zip
 
-# Installer Composer (avec chmod +x et ajout PATH)
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && chmod +x /usr/local/bin/composer
+# Installer Composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer
 
-ENV PATH="/usr/local/bin:${PATH}"
-
-# Vérification de Composer (optionnel, tu peux commenter après test)
-RUN composer --version
-
-# Copier le php.ini personnalisé (à ajuster selon ton projet)
-COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
-
-# Copier la config nginx personnalisée
-COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
-
-# Créer un utilisateur non-root pour la sécurité
-RUN adduser -D symfony
-
-# Copier le projet dans le dossier de travail
+# Créer les répertoires nécessaires
 WORKDIR /var/www/symfony
+
+# Copier les fichiers du projet
 COPY . .
 
-# Installer les dépendances PHP (sans interaction et sans dev)
-RUN composer install --no-interaction --no-dev --no-scripts --optimize-autoloader
+# Supprimer le cache potentiel et installer les dépendances avec les bons droits
+RUN rm -rf vendor/ var/cache/* \
+    && composer install --no-interaction --optimize-autoloader
 
-# Copier le script d’entrée
-COPY ./docker/entrypoint.sh /entrypoint.sh
+# Copier la configuration nginx
+COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Lancer PHP-FPM et nginx via un script d’entrée
+COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Exposer le port HTTP
