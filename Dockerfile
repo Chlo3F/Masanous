@@ -32,7 +32,7 @@ COPY . .
 
 # Supprimer le cache potentiel et installer les dépendances avec les bons droits
 RUN rm -rf vendor/ var/cache/* \
-    && composer install --no-interaction --no-dev --no-scripts --optimize-autoloader
+    && composer install --no-interaction --optimize-autoloader
 
 # Copier la configuration nginx
 COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
