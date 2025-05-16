@@ -1,6 +1,5 @@
 FROM php:8.2-fpm-alpine
 
-# Installer les dépendances système nécessaires
 RUN apk add --no-cache \
     nginx \
     bash \
@@ -21,29 +20,26 @@ RUN apk add --no-cache \
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
 
-# Copier le php.ini personnalisé (à ajuster selon ton projet)
+# Copier le php.ini
 COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
 
-# Créer les répertoires nécessaires
 WORKDIR /var/www/symfony
-
-# Copier les fichiers du projet
 COPY . .
 
-# Supprimer le cache potentiel et installer les dépendances avec les bons droits
-RUN rm -rf vendor/ var/cache/* \
-    && composer install --no-interaction --optimize-autoloader
+# Fixer les droits (optionnel mais recommandé)
+RUN chown -R www-data:www-data /var/www/symfony
 
-# Copier la configuration nginx
+# Installer les dépendances
+RUN composer install --no-interaction --no-dev --optimize-autoloader
+
+# NGINX config
 COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
-# Lancer PHP-FPM et nginx via un script d’entrée
+# Entrypoint
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Exposer le port HTTP
 EXPOSE 80
 
-# Commande d’entrée : exécute NGINX au premier plan, php-fpm en arrière-plan
 CMD ["/entrypoint.sh"]
