@@ -41,7 +41,7 @@ WORKDIR /var/www/symfony
 COPY . .
 
 # Installer les dépendances PHP (sans interaction et sans dev)
-RUN composer install --no-interaction --no-dev --optimize-autoloader
+RUN composer install --no-interaction --no-dev --no-scripts --optimize-autoloader
 
 # Exposer le port HTTP
 EXPOSE 80
