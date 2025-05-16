@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -10,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -19,11 +17,11 @@ class ContactType extends AbstractType
             ->add('fullName', TextType::class, [
                 'label' => 'Nom complet',
                 'required' => true,
-                'contraints' => [
-                    new Assert\NotBlank(['message' => 'Le nom est obligatoire']),
+                'constraints' => [
+                    new Assert\NotBlank(['message' => 'Le nom est obligatoire.']),
                 ],
             ])
-            ->add ('email', EmailType::class, [
+            ->add('email', EmailType::class, [
                 'label' => 'Adresse email',
                 'required' => true,
                 'constraints' => [
@@ -31,7 +29,7 @@ class ContactType extends AbstractType
                     new Assert\Email(['message' => 'Email invalide.']),
                 ],
             ])
-            ->add ('phone', TextType::class, [
+            ->add('phone', TextType::class, [
                 'label' => 'Téléphone',
                 'required' => true,
                 'constraints' => [
@@ -45,11 +43,11 @@ class ContactType extends AbstractType
             ->add('message', TextareaType::class, [
                 'label' => 'Votre message',
                 'required' => true,
-                'contraints' => [
+                'constraints' => [
                     new Assert\NotBlank(),
                     new Assert\Length([
-                        'min' =>10,
-                        'minMessage' =>'Votre message doit faire au moins 10 caractères.'
+                        'min' => 10,
+                        'minMessage' => 'Votre message doit faire au moins 10 caractères.'
                     ]),
                 ],
             ]);
@@ -57,8 +55,7 @@ class ContactType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'csrf_protection' => true,
-        ]);
+        $resolver->setDefaults([]);
+        
     }
 }

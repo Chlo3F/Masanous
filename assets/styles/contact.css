@@ -1,0 +1,25 @@
+.form {
+    padding: 3em;
+    box-shadow: #d4b483 0px 2px 8px 0px;
+
+}
+.logo-form {
+    width: 200px;
+    height: 200px;
+}
+
+.btn {
+    background-color: #32AFA9;
+    color: #fff;
+    margin-top: 2em;
+    padding:0.5em;
+    letter-spacing: 2.2px;
+    cursor: pointer;
+    transform: translateY(0);
+    transition: all 0.3s linear;
+}
+.btn:hover {
+    box-shadow: inset 8rem 0 0 0 #32AFA9, inset -8rem 0 0 0 #d4b483;
+    transform: translateY(-0.5rem);
+    color: #fff;
+}
