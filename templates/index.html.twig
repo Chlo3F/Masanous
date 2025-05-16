@@ -2,7 +2,9 @@
 {% block body %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{ path('app_masanous') }}">Masanous</a>
+            <a class="navbar-brand" href="{{ path('app_masanous') }}">
+                <img src="{{ asset('images/Masanous.png') }}" class="logo">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -23,26 +25,44 @@
     </nav>
     
     <section class="hero-section">
-        <div class="container">
+        <div class="container-hero">
             <div class="img-hero">
                 <img src="{{ asset('images/piscine.jpg') }}" alt="Piscine en forme de bain romain" class="img-fluid pool-image">
             </div>
+            <div class="text-hero">
             <h1>Bienvenue au Masanous</h1>
             <p class="lead">Votre escapade provençale entre ciel bleu, nature et authenticité</p>
             <h2>Un séjour inoubliable au cœur du Pays de Fayence</h2>
             
             <div class="row mt-5">
                 <div class="txt-hero">
-                    <p>Vivez l'expérience d'un séjour en Provence dans un cadre exceptionnel, au cœur de l'un des neuf villages perchés du canton de Fayence. Situé sur une colline, dans une propriété privée de 5300 m² avec une vue imprenable sur le village, ce ravissant Mas en pierres de pays vous accueille pour des vacances paisibles et ressourçantes.</p>
-                    <p>Confortablement aménagé pour accueillir jusqu'à 6 personnes, ce havre de paix offre 3 chambres spacieuses, une décoration raffinée et une piscine élégante en forme de bain romain. Le charme de l'ancien se marie ici parfaitement au confort moderne pour un séjour tout en douceur, à seulement 5 minutes du centre de Fayence, 40 minutes de la mer comme de la montagne, et 45 minutes de l'aéroport international de Nice.</p>
-                    <a href="{{ path('app_contact') }}" class="contact-btn mt-3">Contactez-nous</a>
+                    <p>Vivez l'expérience d'un séjour en Provence dans un cadre exceptionnel, 
+                        au cœur de l'un des neuf villages perchés du canton de Fayence. 
+                        Situé sur une colline, dans une propriété privée de 5300 m² avec une vue imprenable sur le village, 
+                        ce ravissant Mas en pierres de pays vous accueille pour des vacances paisibles et ressourçantes.</p>
+                    <p>Confortablement aménagé pour accueillir jusqu'à 6 personnes, ce havre de paix offre 3 chambres spacieuses, 
+                        une décoration raffinée et une piscine élégante en forme de bain romain. 
+                        Le charme de l'ancien se marie ici parfaitement au confort moderne pour un séjour tout en douceur,
+                         à seulement 5 minutes du centre de Fayence, 40 minutes de la mer comme de la montagne, 
+                         et 45 minutes de l'aéroport international de Nice.</p>
                 </div>
+            </div>
             </div>
         </div>
     </section>
 
     <section id="equipements" class="py-5 bg-light">
-        <div class="container">
+        <div class="container-equipement">
+            <div class="img-container">
+              
+                   <img src="{{ asset('images/salon.jpg') }}" class="img-maison">
+                   <img src="{{ asset('images/piscine2.jpg') }}" class="img-maison">
+                   <img src="{{ asset('images/terrasse2.jpg') }}" class="img-maison">   
+                   <img src="{{ asset('images/cuisinesalon.jpg') }}" class="img-maison">
+                   <img src="{{ asset('images/chambre2.jpg') }}" class="img-maison">
+                   <img src="{{ asset('images/chambre3.jpg') }}" class="img-maison">
+                
+            </div>
             <h2 class="section-title text-center">Un confort comme à la maison</h2>
             <div class="row">
                 <div class="col-md-6">
@@ -50,7 +70,8 @@
                     <ul class="feature-list">
                         <li>Connexion Wi-Fi fibre gratuite</li>
                         <li>Climatisation réversible dans toutes les chambres</li>
-                        <li>Cuisine moderne entièrement équipée : four, plaques induction, micro-ondes, lave-vaisselle, réfrigérateur/congélateur, cafetière Nespresso, petit électroménager complet</li>
+                        <li>Cuisine moderne entièrement équipée : four, plaques induction, micro-ondes,
+                             lave-vaisselle, réfrigérateur/congélateur, cafetière Nespresso, petit électroménager complet</li>
                         <li>Buanderie avec lave-linge, fer et table à repasser</li>
                         <li>Chambres avec literie haut de gamme (matelas 160x200 ou 90 cm), oreillers mémoire de forme</li>
                     </ul>
@@ -62,14 +83,19 @@
                         <li>Sécurité renforcée : portail télécommandé, détecteurs de fumée, éclairage extérieur, parking sécurisé</li>
                     </ul>
                     <p class="mt-4">Les serviettes et draps de qualité sont fournis, et le ménage de fin de séjour est obligatoire (120 €).</p>
-                    <a href="{{ path('app_contact') }}" class="contact-btn mt-3">Contactez-nous</a>
                 </div>
+                <a href="{{ path('app_contact') }}" class="contact-btn mt-3">Contactez-nous</a>
             </div>
         </div>
     </section>
 
     <section id="activites" class="py-5">
         <div class="container">
+            <div class="img-container">
+                <img src="{{ asset('images/Sans titre.jpg') }}" class="img-tourisme">
+                <img src="{{ asset('images/Sans titre1.jpg') }}" class="img-tourisme">
+                <img src="{{ asset('images/Sans titre3.jpg') }}" class="img-tourisme">
+            </div>
             <h2 class="section-title text-center">Découvrez les trésors du Pays de Fayence</h2>
             <div class="row">
                 <div class="col-md-6">
@@ -86,9 +112,11 @@
                         <li>Golf international, spas, centres de bien-être</li>
                         <li>Équitation, artisanats locaux, bonne cuisine, vins du terroir</li>
                     </ul>
-                    <p class="mt-4">À 40 minutes des plages azuréennes, à 45 minutes de Nice, Cannes ou Saint-Raphaël, le Mas de Fayence est le point de départ rêvé pour explorer la Provence authentique tout en profitant d'un refuge intime, élégant et paisible.</p>
-                    <a href="{{ path('app_contact') }}" class="contact-btn mt-3">Contactez-nous</a>
+                    <p class="mt-4">À 40 minutes des plages azuréennes, à 45 minutes de Nice, Cannes ou Saint-Raphaël,
+                         le Mas de Fayence est le point de départ rêvé pour explorer la Provence authentique tout en
+                          profitant d'un refuge intime, élégant et paisible.</p>      
                 </div>
+                <a href="{{ path('app_contact') }}" class="contact-btn mt-3">Contactez-nous</a>
             </div>
         </div>
     </section>

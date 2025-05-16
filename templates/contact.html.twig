@@ -4,11 +4,13 @@
 
 {% block body %}
 <div class="container mt-5 d-flex flex-column align-items-center">
-    <a class="navbar-brand mb-3" href="{{ path('app_masanous') }}">Masanous</a>
+    <a class="navbar-brand mb-3" href="{{ path('app_masanous') }}">
+        <img src="{{ asset('images/Masanous.png') }}" class="logo-form">
+    </a>
     <h1 class="mb-4 text-center">Contactez-nous</h1>
-
-    {{ form_start(form, {'attr': {'id': 'contactForm', 'class': 'w-50 w-md-50'}}) }}
-
+    
+    {{ form_start(form, {'attr': {'id': 'contactForm'}}) }}
+    <div class="form">
     <div class="mb-3">
         {{ form_label(form.fullName, null, {'label_attr': {'class': 'form-label'}}) }}
         {{ form_widget(form.fullName, {'attr': {'class': 'form-control'}}) }}
@@ -33,9 +35,10 @@
         <span class="error" id="messageError"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary d-block mx-auto mt-3">Envoyer</button>
-
+    <button type="submit" class="btn d-block mx-auto mt-3">Envoyer</button>
+    </div>
     {{ form_end(form) }}
+    
 </div>
 
 <script src="{{ asset('js/contact-validation.js') }}"></script>

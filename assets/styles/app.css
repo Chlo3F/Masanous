@@ -1,3 +1,142 @@
+:root {
+        /*=== Font and typography ===*/
+    /*.5rem = 8px | 1rem = 16px ...*/
+    --body-font: Arial, Helvetica, sans-serif;
+    --biggest-font-size: 2.25rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --h4-font-size: .980rem;
+    --h5-font-size: .950rem;
+    --normal-font-size: .938rem;
+    --small-font-size: .813rem;
+
+    /*=== Font weight ===*/
+    --font-regular: 400;
+    --font-semi-bold: 600;
+    --font-bold: 700;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 900px) {
+    :root {
+        --biggest-font-size: 4.25rem;
+        --h1-font-size: 2.25rem;
+        --h2-font-size: 1.5rem;
+        --h3-font-size: 1.25rem;
+        --normal-font-size: 1rem;
+        --small-font-size: .875rem;
+    }
+}
+
 body {
-    background-color: skyblue;
+    font-family: "Playfair", serif;   
+}
+
+.logo {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.container-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.text-hero {
+    text-align: center;
+    margin: 1.5em;
+    max-width: 50em;
+}
+
+.section-title {
+    color: #495057;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #d4b483;
+}
+
+.feature-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.feature-list li {
+    padding: 8px 0;
+    position: relative;
+    padding-left: 25px;
+}
+
+.feature-list li:before {
+    content: '•';
+    color: #d4b483;
+    position: absolute;
+    left: 0;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.pool-image {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.contact-btn {
+    width: auto;
+    background-color: #d4b483;
+    border: none;
+    padding: 10px 25px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5%;
+    transition: all 0.3s;
+}
+
+.contact-btn:hover {
+    background-color: #c0a070;
+    transform: translateY(-2px);
+}
+
+.img-container {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 2em;
+}
+
+.img-maison {
+    max-width: 30em;
+    max-height: 30em;
+    margin: 1.5em;
+}
+
+.row {
+    width: 100%;
+    padding: 1.5em; 
+    justify-content: center;   
+}
+
+.img-tourimse {
+    max-width: 25em;
+}
+
+footer {
+    background-color: #32AFA9;
+    color: white;
+    padding: 20px 0;
+    margin-top: 50px;
 }
