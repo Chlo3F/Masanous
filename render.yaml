@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: symfony-app
+    env: docker
+    repo: https://https://github.com/Chlo3F/Masanous
+    branch: main
+    plan: free
