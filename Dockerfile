@@ -2,32 +2,48 @@
 
 FROM php:8.2-fpm-alpine
 
-# Install dependencies
-RUN apk add --no-cache nginx bash curl libzip-dev zip libpng-dev icu-dev oniguruma-dev \
+# Installer dépendances système et PHP CLI
+RUN apk add --no-cache \
+    nginx \
+    bash \
+    curl \
+    libzip-dev \
+    zip \
+    libpng-dev \
+    icu-dev \
+    oniguruma-dev \
+    php8-cli \
     && docker-php-ext-install pdo pdo_mysql intl opcache mbstring zip
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Installer Composer globalement
+RUN curl -sS https://getcomposer.org/installer \
+    | php -- --install-dir=/usr/local/bin --filename=composer \
+    && chmod +x /usr/local/bin/composer
 
-# Configure PHP
+# Vérifier la version de Composer (utile pour debug build)
+RUN composer --version
+
+# Copier le fichier php.ini personnalisé
 COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
 
-# Create user for Symfony
+# Créer utilisateur pour Symfony
 RUN adduser -D symfony
 
-# Create necessary directories
+# Créer les dossiers nécessaires et copier le code
 RUN mkdir -p /var/www/symfony /run/nginx
 COPY . /var/www/symfony
+
+# Définir le répertoire de travail
 WORKDIR /var/www/symfony
 
-# Install vendor dependencies
+# Installer les dépendances PHP via Composer
 RUN composer install --no-interaction --no-dev --optimize-autoloader
 
-# NGINX configuration
+# Copier la config nginx
 COPY ./docker/nginx/default.conf /etc/nginx/http.d/default.conf
 
-# Expose port 80
+# Exposer le port 80
 EXPOSE 80
 
-# Entrypoint script to launch both PHP-FPM and NGINX
+# Commande de démarrage : PHP-FPM + Nginx
 CMD ["/bin/sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
