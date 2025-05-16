@@ -1,17 +1,11 @@
 #!/bin/sh
 set -e
 
-echo "==> Démarrage Symfony (environnement $APP_ENV)"
-
-# Recréer le cache et assets si nécessaire
+# Symfony cache (env prod implicite grâce à APP_ENV)
 php bin/console cache:clear
-php bin/console assets:install public --no-interaction
+php bin/console assets:install public
+php bin/console importmap:install || true
 
-# Si Symfony UX (optionnel)
-if grep -q "importmap" composer.json; then
-  php bin/console importmap:install
-fi
-
-# Lancer PHP-FPM et NGINX
+# Lancer PHP-FPM + Nginx
 php-fpm -D
 nginx -g "daemon off;"
