@@ -30,7 +30,7 @@ COPY . .
 RUN chown -R www-data:www-data /var/www/symfony
 
 # Installer les dépendances
-RUN composer install --no-interaction --no-dev --optimize-autoloader
+RUN composer install --no-interaction --no-scripts --optimize-autoloader
 
 # NGINX config
 COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
