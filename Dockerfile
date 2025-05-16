@@ -31,6 +31,7 @@ RUN composer --version
 COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
 
 # Copier la config nginx personnalisée
+COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Créer un utilisateur non-root pour la sécurité
@@ -43,8 +44,12 @@ COPY . .
 # Installer les dépendances PHP (sans interaction et sans dev)
 RUN composer install --no-interaction --no-dev --no-scripts --optimize-autoloader
 
+# Copier le script d’entrée
+COPY ./docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Exposer le port HTTP
 EXPOSE 80
 
-# Lancer php-fpm en daemon puis nginx en foreground
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+# Commande d’entrée : exécute NGINX au premier plan, php-fpm en arrière-plan
+CMD ["/entrypoint.sh"]
