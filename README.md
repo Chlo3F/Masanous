@@ -35,33 +35,22 @@ docker-compose up --build
 
 >>>> http://localhost:8080
 
+---
+
 ## ☁️ Déploiement sur Render
 
-Ce projet est compatible avec Render pour un déploiement gratuit.
-Étapes de déploiement
+Ce projet est déployable gratuitement sur [Render.com](https://render.com/).
 
-    Crée un compte sur Render.com
+### Étapes :
 
-    Clique sur "New Web Service"
+1. Créer un compte sur [Render](https://render.com/)
+2. Créer un "New Web Service"
+3. Choisir :
+   - **Type** : Web Service
+   - **Environment** : Docker
+   - **Dockerfile** : `Dockerfile` à la racine
+   - **Branch** : `main`
 
-    Connecte ton dépôt GitHub
+> ✅ Le fichier `render.yaml` est déjà prêt.
 
-    Choisis :
 
-        Type : Web Service
-
-        Environment : Docker
-
-        Dockerfile Path : Dockerfile (à la racine)
-
-        Branch : main
-
-✅ Le conteneur unique contient :
-
-    PHP 8.2 avec les extensions nécessaires
-
-    NGINX
-
-    Symfony installé via Composer
-
-    Le fichier render.yaml est déjà prêt pour simplifier l'import Render.
