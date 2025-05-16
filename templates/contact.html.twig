@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block title %}Formulaire de Contact{% endblock %}
+
+{% block body %}
+<div class="container mt-5 d-flex flex-column align-items-center">
+    <a class="navbar-brand mb-3" href="{{ path('app_masanous') }}">Masanous</a>
+    <h1 class ="mb-4 text-center">Contactez-nous</h1>
+
+    {{ form_start(form, {'attr:'{'id': 'contactForm', 'class': 'w,-50 w-md-50'}}) }}
+
+    <div class="mb-3">
+        {{ form_label(form.fullName, null, {'label_attr': {'class': 'form-label'}}) }}
+        {{ form-widget(form.fullName, {'attr': {'class': 'form-control'}}) }}
+        <span class="error" id="nameError"></span>
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.email, null, {'label_attr': {'class': 'form-label'}}) }}
+        {{ form-widget(form.email, {'attr': {'class': 'form-control'}}) }}
+        <span class="error" id="emailError"></span>
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.phone, null, {'label_attr': {'class': 'form-label'}}) }}
+        {{ form-widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+        <span class="error" id="phoneError"></span>
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.message, null, {'label_attr': {'class': 'form-label'}}) }}
+        {{ form-widget(form.message, {'attr': {'class': 'form-control'}}) }}
+        <span class="error" id="messageError"></span>
+    </div>
+
+    <button type="submit" clas="btn btn-primary d-block mx-auto mt-3">Envoyer</button>
+
+    {{ form_end(form) }}
+</div>
+
+<script src="{{ asset('contact-validation.js') }}"></script>
+{% endblock %}
