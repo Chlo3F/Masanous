@@ -21,6 +21,9 @@ RUN apk add --no-cache \
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
 
+# Copier le php.ini personnalisé (à ajuster selon ton projet)
+COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
+
 # Créer les répertoires nécessaires
 WORKDIR /var/www/symfony
 
@@ -29,9 +32,10 @@ COPY . .
 
 # Supprimer le cache potentiel et installer les dépendances avec les bons droits
 RUN rm -rf vendor/ var/cache/* \
-    && composer install --no-interaction --optimize-autoloader
+    && composer install --no-interaction --no-dev --no-scripts --optimize-autoloader
 
 # Copier la configuration nginx
+COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Lancer PHP-FPM et nginx via un script d’entrée
