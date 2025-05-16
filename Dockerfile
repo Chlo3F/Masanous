@@ -29,7 +29,8 @@ RUN curl -sS https://getcomposer.org/installer \
 COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
 
 # Copier configuration Nginx personnalisée
-COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+
 
 # Créer utilisateur Symfony
 RUN adduser -D symfony
