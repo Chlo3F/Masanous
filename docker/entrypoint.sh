@@ -1,15 +1,17 @@
 #!/bin/sh
 set -e
 
-# Nettoyage et cache
+echo "==> Démarrage Symfony (environnement $APP_ENV)"
+
+# Recréer le cache et assets si nécessaire
 php bin/console cache:clear
+php bin/console assets:install public --no-interaction
 
-# Installation des assets (optionnel)
-php bin/console assets:install public
+# Si Symfony UX (optionnel)
+if grep -q "importmap" composer.json; then
+  php bin/console importmap:install
+fi
 
-# Importmap si utilisé (Symfony UX)
-php bin/console importmap:install
-
-# Lancer les services
+# Lancer PHP-FPM et NGINX
 php-fpm -D
 nginx -g "daemon off;"

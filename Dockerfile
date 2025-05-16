@@ -20,19 +20,20 @@ RUN apk add --no-cache \
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
 
-# Copier le php.ini
+# php.ini
 COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
 
 WORKDIR /var/www/symfony
+
 COPY . .
 
-# Fixer les droits (optionnel mais recommandé)
+# Fixer les droits
 RUN chown -R www-data:www-data /var/www/symfony
 
-# Installer les dépendances
-RUN composer install --no-interaction --no-scripts --optimize-autoloader
+# Installer les dépendances (en prod, sans scripts pour éviter erreurs)
+RUN composer install --no-interaction --optimize-autoloader --no-dev --no-scripts
 
-# NGINX config
+# NGINX
 COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
